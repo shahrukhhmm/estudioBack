@@ -8,7 +8,7 @@ const UserDto = require("../dto/user");
 
 
 const authController = {
-    register: async (req, res, next) => {
+    register: async(req, res, next) => {
         try {
             const registerSchema = Joi.object({
                 name: Joi.string().min(5).max(20).required(),
@@ -58,7 +58,7 @@ const authController = {
             res.status(500).send(error);
         }
     },
-    getAll: async (req, res, next) => {
+    getAll: async(req, res, next) => {
         try {
             const allWithSongs = await userService.getAll()
             if (allWithSongs.length > 0) {
@@ -71,7 +71,7 @@ const authController = {
             res.status(500).send(error);
         }
     },
-    getById: async (req, res, next) => {
+    getById: async(req, res, next) => {
         try {
             const id = req.params.id;
             console.log('User id ==> ', id)
@@ -85,7 +85,7 @@ const authController = {
             res.status(500).send(error);
         }
     },
-    Login: async (req, res) => {
+    Login: async(req, res) => {
         try {
             const LoginSchema = Joi.object({
                 email: Joi.string().email().required(),
@@ -112,7 +112,7 @@ const authController = {
             res.status(500).send(error.message);
         }
     },
-    LogOut: async (req, res) => {
+    LogOut: async(req, res) => {
         try {
             const { authorization } = req.headers;
             if (!authorization) {
@@ -121,7 +121,7 @@ const authController = {
 
             const refreshToken = authorization;
 
-            const deletedToken = await tokee.findOneAndUpdate({ token: refreshToken }, { $set: { token: null } },);
+            const deletedToken = await tokee.findOneAndUpdate({ token: refreshToken }, { $set: { token: null } }, );
             if (!deletedToken) {
                 return res.status(400).send({ message: "Logout Failed!" })
             }
@@ -135,7 +135,7 @@ const authController = {
             res.status(500).send(error.message);
         }
     },
-    refresh: async (req, res, next) => {
+    refresh: async(req, res, next) => {
         // 1. get refreshToken from cookies
         // 2. verify refreshToken
         // 3. generate new tokens
@@ -191,7 +191,7 @@ const authController = {
         });
     },
 
-    updateProfile: async (req, res, next) => {
+    updateProfile: async(req, res, next) => {
 
         try {
             const userId = req.params.userId
@@ -225,7 +225,7 @@ const authController = {
         }
     },
 
-    updateProfileImage: async (req, res, next) => {
+    updateProfileImage: async(req, res, next) => {
 
         try {
 
@@ -260,7 +260,7 @@ const authController = {
 
     },
 
-    updateProfileCover: async (req, res, next) => {
+    updateProfileCover: async(req, res, next) => {
 
         try {
 
@@ -293,7 +293,7 @@ const authController = {
         }
     },
 
-    followUser: async (req, res, next) => {
+    followUser: async(req, res, next) => {
 
         const { userId, followUserId } = req.body;
 
@@ -325,7 +325,7 @@ const authController = {
     },
 
     // Unfollow a user
-    unfollowUser: async (req, res) => {
+    unfollowUser: async(req, res) => {
 
         const { userId, unfollowUserId } = req.body;
 
@@ -355,7 +355,7 @@ const authController = {
         }
     },
 
-    getfollowerFollowing: async (req, res) => {
+    getfollowerFollowing: async(req, res) => {
         try {
             const userId = req.params.userId;
 
