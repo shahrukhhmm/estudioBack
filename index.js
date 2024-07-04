@@ -23,7 +23,7 @@ app.use(cookieParser())
 
 // cross origin resource sharing
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['https://estudio-psi.vercel.app', 'https://www.e-studio.website'],
     credentials: true,
 }))
 
