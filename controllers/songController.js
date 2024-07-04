@@ -49,7 +49,7 @@ const create = async(req, res) => {
 // Controller function to get all songs
 const getAll = async(req, res) => {
     try {
-        const songs = await Song.find();
+        const firstSong = await Song.findOne();
         res.status(200).json({ songs });
     } catch (error) {
         console.error('Error fetching songs:', error);
