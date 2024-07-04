@@ -1,7 +1,7 @@
 const Song = require('../models/song');
 
 
-const create = async (req, res) => {
+const create = async(req, res) => {
     try {
 
         const { userId, name, author_name, lang, type, attribution, category, audioFile, thumbnail, individual } = req.body;
@@ -47,7 +47,7 @@ const create = async (req, res) => {
 
 
 // Controller function to get all songs
-const getAll = async (req, res) => {
+const getAll = async(req, res) => {
     try {
         const songs = await Song.find();
         res.status(200).json({ songs });
@@ -58,7 +58,7 @@ const getAll = async (req, res) => {
 };
 
 // Controller function to get a song by ID
-const getById = async (req, res) => {
+const getById = async(req, res) => {
     try {
         const { id } = req.params;
         const song = await Song.findById(id);
@@ -73,7 +73,7 @@ const getById = async (req, res) => {
 };
 
 // Controller function to update a song
-const update = async (req, res) => {
+const update = async(req, res) => {
     try {
         const { id } = req.params;
         const updatedSong = await Song.findByIdAndUpdate(id, req.body, { new: true });
@@ -88,7 +88,7 @@ const update = async (req, res) => {
 };
 
 // Controller function to get songs by category
-const getByCategory = async (req, res) => {
+const getByCategory = async(req, res) => {
     try {
         const { category } = req.params;
         const songs = await Song.find({ category });
@@ -100,7 +100,7 @@ const getByCategory = async (req, res) => {
 };
 
 // Controller function to get thumbnails by category
-const getThumbnailsByCategory = async (req, res) => {
+const getThumbnailsByCategory = async(req, res) => {
     try {
         const { category } = req.params;
         const songs = await Song.find({ category }).select('thumbnail');
@@ -116,7 +116,7 @@ const getThumbnailsByCategory = async (req, res) => {
 };
 
 // Controller function to add a like to a song
-const addLike = async (req, res) => {
+const addLike = async(req, res) => {
     const { userId, songId } = req.body;
     try {
         const song = await Song.findById(songId);
@@ -136,7 +136,7 @@ const addLike = async (req, res) => {
 };
 
 // Remove a like from a song
-const removeLike = async (req, res) => {
+const removeLike = async(req, res) => {
     const { userId, songId } = req.body;
     try {
         const song = await Song.findById(songId);
@@ -156,7 +156,7 @@ const removeLike = async (req, res) => {
 };
 
 // Controller function to add a comment to a song
-const addComment = async (req, res) => {
+const addComment = async(req, res) => {
     const { songId, userId, content } = req.body;
     try {
         const song = await Song.findById(songId);
@@ -173,7 +173,7 @@ const addComment = async (req, res) => {
 };
 
 // Controller function to get all liked songs
-const getAllLikedSongs = async (req, res) => {
+const getAllLikedSongs = async(req, res) => {
 
     const { userId } = req.params;
     try {
@@ -186,7 +186,7 @@ const getAllLikedSongs = async (req, res) => {
 };
 
 
-const getThumbnailById = async (req, res) => {
+const getThumbnailById = async(req, res) => {
     try {
         const { id } = req.params;
         const song = await Song.findById(id);
@@ -211,7 +211,7 @@ const getThumbnailById = async (req, res) => {
     }
 };
 
-const getAudioById = async (req, res) => {
+const getAudioById = async(req, res) => {
     try {
         const { id } = req.params;
         const song = await Song.findById(id);
@@ -237,7 +237,7 @@ const getAudioById = async (req, res) => {
 };
 
 
-const deleteComment = async (req, res) => {
+const deleteComment = async(req, res) => {
     const { songId, commentId } = req.body;
     try {
         const song = await Song.findById(songId);

@@ -4,27 +4,35 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { create, getAll, getById, update, getByCategory, getThumbnailsByCategory, addLike, addComment,
+const {
+    create,
+    getAll,
+    getById,
+    update,
+    getByCategory,
+    getThumbnailsByCategory,
+    addLike,
+    addComment,
     getAllLikedSongs,
     getThumbnailById,
     getAudioById,
     removeLike,
     deleteComment
- } = require('../controllers/songController');
+} = require('../controllers/songController');
 
 // Multer configuration
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/') // Set the destination folder where files will be saved
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname) // Keep the original file name
-    }
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, 'uploads/') // Set the destination folder where files will be saved
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, file.originalname) // Keep the original file name
+//     }
+// });
+// const upload = multer({ storage: storage });
 
 // Routes
-router.post('/create', upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'audioFile', maxCount: 1 }]), create);
+router.post('/create', create);
 router.get('/getAll', getAll);
 router.get('/getById/:id', getById);
 router.put('/update/:id', update);
@@ -45,6 +53,3 @@ router.post('/deleteComment', deleteComment);
 router.post('/addLike', addLike);
 
 module.exports = router;
-
-
-
