@@ -127,60 +127,34 @@ const userService = {
 
     },
 
-    updateProfileImage: async({ id, imageFile }) => {
-
+    updateProfileImage: async({ id, imageUrl }) => {
         try {
-
-            console.log("id ==> ", id)
-            const existingUser = await user.findById({ _id: id });
-
-            console.log(existingUser)
-
-            if (!existingUser) {
-                throw new Error('User not found')
-            } else {
-
-                const result = await cloudinary.uploader.upload(imageFile.path, { folder: 'Profiles' })
-
-                const newProfileImage = {
-                    public_id: result.public_id,
-                    profile_url: result.secure_url
-                }
-
-                const updateUser = await user.findOneAndUpdate({ _id: id }, { $set: { profileImage: newProfileImage } }, { new: true, useFindAndModify: false })
-
-                console.log(updateUser)
-
-                return updateUser;
+            const user = await User.findById(id);
+            if (!user) {
+                throw new Error('User not found');
             }
+            user.profileImageUrl = imageUrl; // Adjust the field name as necessary
+            await user.save();
+            return user;
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            return null;
         }
-
     },
 
-    updateCoverImage: async({ id, imageFile }) => {
+    updateCoverImage: async({ id, imageUrl }) => {
 
         try {
-
-            const existingUser = await user.findById({ _id: id });
-
-            if (!existingUser) {
-                throw new Error('User not found')
-            } else {
-
-                const result = await cloudinary.uploader.upload(imageFile.path, { folder: 'Profiles' })
-
-                const newCoverImage = {
-                    public_id: result.public_id,
-                    profile_url: result.secure_url
-                }
-
-                const updateUser = await user.findOneAndUpdate({ _id: id }, { $set: { profileCover: newCoverImage } }, { new: true, useFindAndModify: false })
-                return updateUser;
+            const user = await User.findById(id);
+            if (!user) {
+                throw new Error('User not found');
             }
+            user.coverImageUrl = imageUrl;
+            await user.save();
+            return user;
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            return null;
         }
 
     },

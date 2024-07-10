@@ -49,8 +49,8 @@ const create = async(req, res) => {
 // Controller function to get all songs
 const getAll = async(req, res) => {
     try {
-        const firstSong = await Song.findOne();
-        res.status(200).json({ songs });
+        const firstSong = await Song.find();
+        res.status(200).json({ firstSong });
     } catch (error) {
         console.error('Error fetching songs:', error);
         res.status(500).json({ error: 'Internal Server Error' });

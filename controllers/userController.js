@@ -226,70 +226,72 @@ const authController = {
     },
 
     updateProfileImage: async(req, res, next) => {
-
         try {
+            const userId = req.params.userId;
+            const { imageUrl } = req.body;
 
-            const userId = req.params.userId
-            const imageFile = req.file
-
-            if (!imageFile) {
-                res.status(401).json({
-                    message: "Please upload the image",
+            if (!imageUrl) {
+                return res.status(400).json({
+                    message: "Please provide the image URL",
                     success: false
-                })
+                });
             }
 
-            const result = await userService.updateProfileImage({ id: userId, imageFile })
+            const result = await userService.updateProfileImage({ id: userId, imageUrl });
 
             if (result) {
-                res.status(200).json({
-                    message: 'Profile Image Update Successfully',
+                return res.status(200).json({
+                    message: 'Profile Image URL Updated Successfully',
                     success: true,
                     result
-                })
+                });
             } else {
-                res.status(401).json({
-                    message: 'Failed to update the profile image'
-                })
+                return res.status(400).json({
+                    message: 'Failed to update the profile image URL',
+                    success: false
+                });
             }
-
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            return res.status(500).json({
+                message: 'Internal Server Error',
+                success: false
+            });
         }
-
-
     },
 
     updateProfileCover: async(req, res, next) => {
-
         try {
+            const userId = req.params.userId;
+            const { imageUrl } = req.body;
 
-            const userId = req.params.userId
-            const imageFile = req.file
-
-            if (!imageFile) {
-                res.status(401).json({
-                    message: "Please upload the image",
+            if (!imageUrl) {
+                return res.status(400).json({
+                    message: "Please provide the image URL",
                     success: false
-                })
+                });
             }
 
-            const result = await userService.updateCoverImage({ id: userId, imageFile })
+            const result = await userService.updateCoverImage({ id: userId, imageUrl });
 
             if (result) {
-                res.status(200).json({
-                    message: 'Profile cover Image Update Successfully',
+                return res.status(200).json({
+                    message: 'Profile Cover Image URL Updated Successfully',
                     success: true,
                     result
-                })
+                });
             } else {
-                res.status(401).json({
-                    message: 'Failed to update the profile image'
-                })
+                return res.status(400).json({
+                    message: 'Failed to update the profile cover image URL',
+                    success: false
+                });
             }
-
         } catch (error) {
-            console.log(error)
+            console.error(error);
+            return res.status(500).json({
+                message: 'Internal Server Error',
+                success: false
+            });
         }
     },
 
