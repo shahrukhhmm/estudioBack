@@ -129,13 +129,13 @@ const userService = {
 
     updateProfileImage: async({ id, imageUrl }) => {
         try {
-            const user = await User.findById(id);
-            if (!user) {
+            const User = await user.findById(id);
+            if (!User) {
                 throw new Error('User not found');
             }
-            user.profileImageUrl = imageUrl; // Adjust the field name as necessary
-            await user.save();
-            return user;
+            User.profileImage = imageUrl; // Adjust the field name as necessary
+            await User.save();
+            return User;
         } catch (error) {
             console.error(error);
             return null;
@@ -145,13 +145,13 @@ const userService = {
     updateCoverImage: async({ id, imageUrl }) => {
 
         try {
-            const user = await User.findById(id);
-            if (!user) {
+            const User = await user.findById(id);
+            if (!User) {
                 throw new Error('User not found');
             }
-            user.coverImageUrl = imageUrl;
-            await user.save();
-            return user;
+            User.profileCover = imageUrl;
+            await User.save();
+            return User;
         } catch (error) {
             console.error(error);
             return null;

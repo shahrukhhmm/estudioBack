@@ -19,20 +19,11 @@ const userSchema = new mongoose.Schema({
         type: Date,
     },
     profileCover: {
-        public_id: {
-            type: String,
-        },
-        profile_url: {
-            type: String,
-        }
+        type: String,
     },
     profileImage: {
-        public_id: {
-            type: String,
-        },
-        profile_url: {
-            type: String,
-        }
+
+        type: String,
     },
     location: {
         city: {
