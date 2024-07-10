@@ -17,13 +17,13 @@ const cloudinary = require('cloudinary').v2
 app.use(bodyParser.json());
 
 // body parser
-app.use(express.json({ limit: "50mb" }))
+app.use(express.json({ limit: "50mb" }));
 
 app.use(cookieParser())
 
 // cross origin resource sharing
 app.use(cors({
-    origin: ['https://estudio-psi.vercel.app', 'https://www.e-studio.website'],
+    origin: ['https://estudio-psi.vercel.app', 'https://www.e-studio.website', 'http://localhost:3000'],
     credentials: true,
 }))
 
